@@ -13,7 +13,7 @@ function getArray()
         arrCategory[i] = key;
         const showList_lsc = localStorage.getItem(key);
        // console.log("showlist", showList_lsc);
-        // const getTaskhome = JSON.parse(showList_lsc);
+        const getTaskhome = JSON.parse(showList_lsc);
         
         for(var j = 0; j< getTaskhome.length ; j++)
         {
@@ -297,8 +297,10 @@ function showListComplete_Refresh()
         //var key = localStorage.key(i);
         //console.log(key);
         const showList_lsc = localStorage.getItem('completed');
+        if(showList_lsc != null)
+        {
         const getTaskhome = JSON.parse(showList_lsc);
-
+        console.log(getTaskhome);
         for(var j=0;j<getTaskhome.length;j++)
         {
                 var label_key =document.createElement("label_key");//label
@@ -326,6 +328,8 @@ function showListComplete_Refresh()
 
             }
         }
+        
+}
 
       
 
@@ -340,6 +344,10 @@ function addList_storage(e)
     if(newItem === "" || category === "")
     {
         alert("Try Again!!");
+    }
+    else if(priority === 'NONE')
+    {
+        alert("Choose Priority");
     }
     else
     {
@@ -356,11 +364,35 @@ function addList_storage(e)
     else
     {
         tasks = JSON.parse(lsc);
+        
+    }
+
+    if(tasks.length == 0)
+    {
+        tasks.push(newItem);
+        tasks.push(priority);
+        localStorage.setItem(category , JSON.stringify(tasks));
+    }
+    else
+    {
+    for(var i = 0; i < tasks.length ; i++)
+        {
+            if(tasks[i] == newItem)
+            {
+                alert("Enter New item");
+                break;
+            }
+            else
+            {
+                console.log("here");
+                tasks.push(newItem);
+                tasks.push(priority);
+                localStorage.setItem(category , JSON.stringify(tasks));
+            }
+        }
     }
     // console.log(tasks);
-    tasks.push(newItem);
-    tasks.push(priority);
-    localStorage.setItem(category , JSON.stringify(tasks));
+    
     //showList_storage(category);
 }
     
