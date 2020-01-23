@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <title>Todo List</title>
+    <!-- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'> -->
+    <link rel="stylesheet" href="style.css" type="text/css" media="screen" charset="utf-8">   
+  </head>
+  <body>
+    
+    <div class="container">
+        <form id="form">
+        <p>
+            <label for="new-task"></label>Add Item &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="new-task" type="text">
+            </br>
+            </br>
+            <label for="new-category"></label> Add Category &nbsp;&nbsp;<input id="new-category" type="text">
+            </br>
+            </br>
+            <label for="new-priority"></label> Add Priority &nbsp;&nbsp;
+            <select name="priority" id="priority">
+                <option value="URGENT">URGENT</option>
+                <option value="MEDIUM">MEDIUM</option>
+                <option value="LOW">LOW</option>
+            </select>
+            </br>
+            </br>
+            <input type="submit" id="add" value="Add" class="add" onclick="addList_storage()">
+            <input type="submit" id="addSub" value="Add - Sub" class="addSub" onclick="addSub_task()">
+        </p>
+        </form>
+        
+        
+        
+
+        <p id="searchId">
+            <input type="submit" id="search" value="Search" class="search" onclick="searchTask()">
+            <input type="submit" id="searchCate" value="SearchCategory" class="searchCate" onclick="searchKey()">
+            <input type="submit" id="sort" value="sortPriority" class="sort" onclick="sortPriority()">
+        </p>
+        <div id="searchValues">
+
+        </div>
+        <br>
+      <h3>Todo</h3>
+      <ul id="incomplete-tasks">
+        
+        
+      </ul>
+      
+      <h3>Completed</h3>
+      <ul id="completed-tasks">
+       
+      </ul>
+    </div>
+
+    <script type="text/javascript" src="newApp2.js"></script>
+
+  </body>
+</html>
