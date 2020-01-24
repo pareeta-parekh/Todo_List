@@ -66,10 +66,22 @@ function deleteTask(e)
                     // console.log("in if");
                     getTaskhome.splice(j, 2);
                    localStorage.setItem(key , JSON.stringify(getTaskhome));
-                   
+                   console.log(getTaskhome.length);
+                }
+
+                if(getTaskhome.length === 0)
+                {
+                    localStorage.removeItem(key);
                 }
             }
+
+            // if(getTaskhome.length === 0)
+            // {
+
+            // }
        }
+
+       
     }
 }
 
@@ -79,6 +91,8 @@ function editTask(e)
         console.log("in edit");
 
         inputValue = prompt("Enter fileName:");
+        if(inputValue != null)
+        {
         var target = e.target.parentNode.innerHTML;
         var newValue = target.split("<");
         //console.log("aaa" , newValue[0]);
@@ -104,7 +118,7 @@ function editTask(e)
                 }
             }
         }
-
+    }
         //showList_storage()
         
     }
@@ -351,50 +365,67 @@ function addList_storage(e)
     }
     else
     {
-    // console.log(newItem);
-    // console.log(category);
-    // console.log(priority);
+        // console.log(newItem);
+        // console.log(category);
+        // console.log(priority);
+        console.log("entered else");
 
-    const lsc = localStorage.getItem(category);
-    let tasks;
-    if(lsc === null)
-    {
-        tasks = [];
-    }
-    else
-    {
-        tasks = JSON.parse(lsc);
+        const lsc = localStorage.getItem(category);
+        let tasks;
+        //console.log("len" , lsc.length);
+        if(lsc === null || lsc == "")
+        {
+            console.log("in if");
+            tasks = [];
+            tasks.push(newItem);
+            tasks.push(priority);
+            localStorage.setItem(category , JSON.stringify(tasks));
+        }
+        else
+        {
+            console.log("in else");
+            
+            tasks = JSON.parse(lsc);
+            console.log(tasks);
+            console.log("len" , tasks.length);
+            if(tasks.length != null && tasks != [])
+            {
+                for(var i = 0; i < tasks.length ; i++)
+                {
+                    console.log(tasks[i]);
+                    console.log(newItem);
+                    if(tasks[i] === newItem)
+                    {
+                        console.log("Do nothing");
+                        alert("Value already entered!, Enter new name");
+                        break;
+                    }
+                    else if(tasks[i] == 'URGENT' || tasks[i] == 'MEDIUM' || tasks[i] == 'LOW')
+                    {
+                        console.log("Do nothing");
+                        break;
+                    }
+                    else
+                    {
+                        console.log("here");
+                        tasks.push(newItem);
+                        tasks.push(priority);
+                        localStorage.setItem(category , JSON.stringify(tasks));
+                    }
+                }
+            }  
+        }
+
+        
+
+        // if(tasks.length == 0)
+        // {
+        //     tasks.push(newItem);
+        //     tasks.push(priority);
+        //     localStorage.setItem(category , JSON.stringify(tasks));
+        // }
         
     }
-
-    if(tasks.length == 0)
-    {
-        tasks.push(newItem);
-        tasks.push(priority);
-        localStorage.setItem(category , JSON.stringify(tasks));
-    }
-    else
-    {
-    for(var i = 0; i < tasks.length ; i++)
-        {
-            if(tasks[i] == newItem)
-            {
-                alert("Enter New item");
-                break;
-            }
-            else
-            {
-                console.log("here");
-                tasks.push(newItem);
-                tasks.push(priority);
-                localStorage.setItem(category , JSON.stringify(tasks));
-            }
-        }
-    }
-    // console.log(tasks);
-    
-    //showList_storage(category);
-}
     
 }
 
